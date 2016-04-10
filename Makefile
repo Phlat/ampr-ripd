@@ -2,15 +2,15 @@
 # Makefile for ampr-ripd
 #
 
-BASEDIR = /usr
-SBINDIR = $(BASEDIR)/sbin
-SCACHEDIR = /var/lib/ampr-ripd
+PREFIX ?= /usr
+SBINDIR ?= $(BASEDIR)/sbin
+SCACHEDIR ?= /var/lib/ampr-ripd
 
 # no need to run dx-broadcast as root
 OWN = daemon
 GRP = daemon
 
-CC = gcc
+CC ?= gcc
 
 #
 # Choose one of the followinf DOPTs if you need debug
@@ -22,11 +22,11 @@ CC = gcc
 # Full debug
 #DOPT = -Wall -O2 -D HAVE_DEBUG
 
-COPT = -Wall -O2
+CFLAGS ?= -Wall -O2
 LOPT =
 
 ampr-ripd:	ampr-ripd.c
-	$(CC) $(COPT) $(DOPT) $(LOPT) -o ampr-ripd ampr-ripd.c
+	$(CC) $(CFLAGS) $(DOPT) $(LOPT) -o ampr-ripd ampr-ripd.c
 
 all:	ampr-ripd
 
